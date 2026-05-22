@@ -1,5 +1,7 @@
 import { Search } from "lucide-react";
 import Link from "next/link";
+import logo from "../public/logo.png"
+import Image from "next/image";
 
 const Navbar = () => {
   return (
@@ -9,7 +11,7 @@ const Navbar = () => {
           href={"/"}
           className="hidden md:inline-block text-lg font-semibold"
         >
-          Dialo
+          <Image src={logo} alt="logo" width={120} height={120} className="rounded-full object-contain w-full"/>
         </Link>
         <div className="relative max-w-[300px] md:2-[400px]">
           <div className="absolute inset-y-0 flex items-center ps-3 pointer-events-none">

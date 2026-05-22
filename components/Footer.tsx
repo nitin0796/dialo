@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import image from "../public/hero-img-2.png"
+import logo from "../public/logo.png"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
@@ -14,13 +14,12 @@ const Footer = () => {
                 {/* Logo */}
                 <div className="flex items-center gap-2">
                     <Image 
-                        src={image} 
+                        src={logo} 
                         alt="Logo" 
-                        width={50} 
-                        height={50}
+                        width={120} 
+                        height={120}
                         className="object-contain"
                     />
-                    <span className="text-xl font-semibold">Dialo</span>
                 </div>
 
                 {/* Navigation Links */}

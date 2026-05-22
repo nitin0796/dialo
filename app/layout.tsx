@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={"h-full antialiased"} suppressHydrationWarning>
-      <body className={`min-h-full flex flex-col ${lato.className}`}>
+      <body className={`min-h-full flex flex-col ${lato.className}`} suppressHydrationWarning>
         <Navbar />
         {children}
         <Footer/>
