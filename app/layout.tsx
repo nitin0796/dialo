@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ToastProvider from "./providers/ToastProvider";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -21,10 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={"h-full antialiased"} suppressHydrationWarning>
-      <body className={`min-h-full flex flex-col ${lato.className}`} suppressHydrationWarning>
+      <body
+        className={`min-h-full flex flex-col ${lato.className}`}
+        suppressHydrationWarning
+      >
+        <ToastProvider />
         <Navbar />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

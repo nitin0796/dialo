@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import Link from "next/link";
-import logo from "../public/logo.png"
+import logo from "../public/logo.png";
 import Image from "next/image";
 
 const Navbar = () => {
@@ -11,7 +11,13 @@ const Navbar = () => {
           href={"/"}
           className="hidden md:inline-block text-lg font-semibold"
         >
-          <Image src={logo} alt="logo" width={120} height={120} className="rounded-full object-contain w-full"/>
+          <Image
+            src={logo}
+            alt="logo"
+            width={120}
+            height={120}
+            className="rounded-full object-contain w-full"
+          />
         </Link>
         <div className="relative max-w-[300px] md:2-[400px]">
           <div className="absolute inset-y-0 flex items-center ps-3 pointer-events-none">
@@ -20,14 +26,14 @@ const Navbar = () => {
 
           <input
             type="text"
-            className="h-[36px] relative pl-10 border-2 border-black/60 text-sm rounded-2xl w-full px-3 py-3 focus:outline-none bg-tra"
+            className="h-9 relative pl-10 border-2 border-black/60 text-sm rounded-2xl w-full px-3 py-3 focus:outline-none bg-tra"
             placeholder="Search"
           />
         </div>
 
-        <Link href={"/add-product"}>
+        <Link href={"/add-watches"}>
           <button className="bg-black text-white px-3 py-2 rounded-lg cursor-pointer">
-            Add Product
+            Add Watches
           </button>
         </Link>
       </div>
