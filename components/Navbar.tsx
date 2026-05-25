@@ -1,9 +1,28 @@
+"use client";
+
 import { Search } from "lucide-react";
 import Link from "next/link";
 import logo from "../public/logo.png";
 import Image from "next/image";
+import { ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
+
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("q", e.target.value);
+
+    const searchQuery = urlParams.toString();
+
+    router.push(`/search?${searchQuery}`);
+    try {
+    } catch (error) {
+      console.log("Error in search", error);
+    }
+  };
+
   return (
     <nav className="px-4 md:px-12 py-4 md:py-6 bg-white text-black">
       <div className="flex justify-between items-center">
@@ -26,6 +45,7 @@ const Navbar = () => {
 
           <input
             type="text"
+            onChange={handleChange}
             className="h-9 relative pl-10 border-2 border-black/60 text-sm rounded-2xl w-full px-3 py-3 focus:outline-none bg-tra"
             placeholder="Search"
           />

@@ -1,18 +1,29 @@
 "use client";
 
-import { addWatches } from "@/utils/addWatches";
+import { updateWatch } from "@/utils/updateWatch";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const Form = () => {
+interface Watch {
+  _id: string;
+  image: string;
+  name: string;
+  price: number;
+  link: string;
+  description: string;
+}
+
+const UpdateForm = ({ watchId }: { watchId: string }) => {
   const [imageUrl, setImageUrl] = useState("");
+  const [watch, setWatch] = useState<Watch | null>(null);
 
   const router = useRouter();
 
   async function clientAddWatch(formData: FormData) {
-    const { error, success } = await addWatches(formData);
+    const { error, success } = await updateWatch(formData, watchId);
 
     if (error) {
       toast.error(error);
@@ -20,9 +31,7 @@ const Form = () => {
 
     if (success) {
       toast.success(success);
-
       router.push("/");
-
       setImageUrl("");
     }
   }
@@ -40,6 +49,21 @@ const Form = () => {
       }
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(`/api/watch/${watchId}`)
+      .then((res) => {
+        setWatch(res.data.watch);
+      })
+      .catch((err) => toast.error(err));
+  }, []);
+
+  useEffect(() => {
+    if (watch) {
+      setImageUrl(watch.image);
+    }
+  }, [watch]);
 
   return (
     <form
@@ -62,6 +86,7 @@ const Form = () => {
           type="file"
           accept="image/*"
           name="image"
+          defaultValue={watch?.image}
           onChange={handlePreview}
           id="image"
           className="w-full px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-gray-500"
@@ -75,6 +100,7 @@ const Form = () => {
           type="text"
           name="name"
           id="name"
+          defaultValue={watch?.name}
           placeholder="Enter Watch Name"
           className="w-full px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-gray-500"
         />
@@ -86,6 +112,7 @@ const Form = () => {
           type="number"
           name="price"
           id="price"
+          defaultValue={watch?.price}
           placeholder="Enter Watch Price"
           className="w-full px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-gray-500"
         />
@@ -97,6 +124,7 @@ const Form = () => {
           type="text"
           name="link"
           id="link"
+          defaultValue={watch?.link}
           placeholder="Enter Watch Link"
           className="w-full px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-gray-500"
         />
@@ -107,6 +135,7 @@ const Form = () => {
         <textarea
           name="description"
           id="description"
+          defaultValue={watch?.description}
           placeholder="Enter Watch Description"
           className="w-full px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-gray-500"
           rows={4}
@@ -123,4 +152,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default UpdateForm;

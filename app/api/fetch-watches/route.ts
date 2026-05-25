@@ -11,6 +11,6 @@ export const GET = async (request: Request) => {
   } catch (error: any) {
     console.log("Error fetching watches");
 
-    return Response.json({message: error.message},{ status: 400 });
+    return Response.json({ message: error.message }, { status: 400 });
   }
 };
