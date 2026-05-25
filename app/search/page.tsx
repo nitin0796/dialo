@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
@@ -13,7 +13,7 @@ interface Watch {
   price: number;
 }
 
-const SearchPage = () => {
+const Search = () => {
   const [watch, setWatch] = useState<Watch[]>([]);
   const searchParams = useSearchParams();
 
@@ -58,6 +58,20 @@ const SearchPage = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SearchPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+        </div>
+      }
+    >
+      <Search />
+    </Suspense>
   );
 };
 

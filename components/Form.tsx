@@ -34,7 +34,7 @@ const Form = () => {
       const fileSize = file.size;
 
       if (Math.round(fileSize / 1024) > 1024) {
-        toast.error("Image greater than 1mb is not allowed");
+        toast.error("Image greater than 1MB is not allowed");
       } else {
         setImageUrl(URL.createObjectURL(file));
       }
